@@ -34,43 +34,19 @@ let teamMembersSection = document.querySelector('.team-member-container')
 let prevButton = document.querySelector('.previous-member-button');
 let nextButton = document.querySelector('.next-member-button');
 let currentEmployeeNumber = 2;
-let currentTime = new Date().valueOf();
 let leftMember;
 let rightMember;
 let middleMember;
 
 
-let createEmployeeElement = function (employeeData, className) {
-    console.log(employeeData)
-    let employee = employeeElement.cloneNode(true);
-    if (className) {
-        employee.classList.add(className);
-    }
-    let image = employee.querySelector('img');
-    image.src = employeeData.picture;
-    image.alt = employeeData.name;
-    let name = employee.querySelector('.team-member-name')
-    name.textContent = employeeData.name;
-    let position = employee.querySelector('.team-member-position-text')
-    position.textContent = employeeData.position;
-    let speech = employee.querySelector('.team-member-article-text')
-    speech.textContent = employeeData.speech;
-
-    return employee;
-}
-
 addInitialEmployees();
 
 prevButton.onclick = function () {
-    if (new Date().valueOf() - currentTime > 600) {
-        previousEmployee();
-    }
+    previousEmployee();
 }
 
 nextButton.onclick = function () {
-    if (new Date().valueOf() - currentTime > 600) {
-        nextEmployee();
-    }
+    nextEmployee();
 }
 
 function previousEmployee() {
@@ -89,8 +65,6 @@ function previousEmployee() {
         currentEmployeeNumber--;
     }
     teamMembersSection.append(rightMember);
-
-    currentTime = new Date().valueOf();
 }
 
 function nextEmployee() {
@@ -110,7 +84,6 @@ function nextEmployee() {
         currentEmployeeNumber++;
     }
     teamMembersSection.append(leftMember);
-    currentTime = new Date().valueOf();
 }
 
 
@@ -124,4 +97,23 @@ function addInitialEmployees() {
     teamMembersSection.append(middleMember);
     teamMembersSection.append(rightMember);
 
+}
+
+function createEmployeeElement(employeeData, className) {
+    console.log(employeeData)
+    let employee = employeeElement.cloneNode(true);
+    if (className) {
+        employee.classList.add(className);
+    }
+    let image = employee.querySelector('img');
+    image.src = employeeData.picture;
+    image.alt = employeeData.name;
+    let name = employee.querySelector('.team-member-name')
+    name.textContent = employeeData.name;
+    let position = employee.querySelector('.team-member-position-text')
+    position.textContent = employeeData.position;
+    let speech = employee.querySelector('.team-member-article-text')
+    speech.textContent = employeeData.speech;
+
+    return employee;
 }
